@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tic Tac Toe!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./css/tictactoe.css">
+</head>
+
+<body>
+    <h1>Tic Tac Toe!</h1>
+    <div class = "ttt">
+        <div class = "row1">
+            <div id = '1' class = "row1-1 box"></div>
+            <div id = '2' class = "row1-2 box"></div>
+            <div id = '3' class = "row1-3 box"></div>
+        </div>
+        <div class = "row2">
+            <div id = '4' class = "row2-1 box"></div>
+            <div id = '5' class = "row2-2 box"></div>
+            <div id = '6' class = "row2-3 box"></div>
+        </div>
+        <div class = "row3">
+            <div id = '7' class = "row3-1 box"></div>
+            <div id = '8' class = "row3-2 box"></div>
+            <div id = '9' class = "row3-3 box"></div>
+        </div>
+    </div>
+
+    <div>
+        <button type="reset" onclick="reset()">Reset!</button> 
+    </div>
+
+
+
+    <script>
+        const winCondition = [[1,2,3], [4,5,6], [7,8,9], [1,5,9], [3,5,7], [1,4,7], [2,5,8], [3,6,9]];
+        var boxSelect = document.getElementsByClassName('box');
+        let currentO = []
+        let currentX = []
+        let winState = -1; //-1 means no winners yet. 0 means circle loses. 1 means circle wins. 2 means draw
+        const noOfBoxes = 9;
+
+
+        for (let i=0; i < boxSelect.length; i++){
+            boxSelect[i].addEventListener('click', addMarkerO);
+        }
+
+        function addMarkerO(){
+            event.target.innerHTML = 'O';
+            currentO.push(parseInt(event.target.id));
+            event.target.removeEventListener('click', addMarkerO);
+            if (currentO.length + currentX.length >= 3){
+                winCheck();
+            }
+            if (winState==-1 && currentO.length + currentX.length < 9){
+                addMarkerX();
+            }
+
+        }
+
+        function addMarkerX(){
+            let randomSelection = Math.ceil(Math.random()*noOfBoxes);
+
+            if (document.getElementById(randomSelection).innerHTML == 'O' || document.getElementById(randomSelection).innerHTML == 'X'){
+                addMarkerX();
+            } else {
+                document.getElementById(randomSelection).innerHTML = 'X';
+                currentX.push(parseInt(randomSelection));
+                document.getElementById(randomSelection).removeEventListener('click', addMarkerO);
+                if (currentO.length + currentX.length >= 3){
+                    winCheck();
+                }
+            }
+        }
+
+        function winCheck(){
+            for (let i=0; i< winCondition.length; i++){
+                if (currentO.indexOf(winCondition[i][0]) != -1 && currentO.indexOf(winCondition[i][1]) != -1 && currentO.indexOf(winCondition[i][2]) != -1 ){
+                    winState = 1; //circle wins
+                    break;
+                } else if (currentX.indexOf(winCondition[i][0]) != -1 && currentX.indexOf(winCondition[i][1]) != -1 && currentX.indexOf(winCondition[i][2]) != -1 ){
+                    winState = 0; //circle loses
+                    break;
+                } else if (currentO.length + currentX.length == 9){
+                    winState = 2; //draw
+                }
+                
+            }
+            if (winState == 1){
+                alert('VICTORY');
+                for (i=1; i<=9; i++){
+                    document.getElementById(i).removeEventListener('click', addMarkerO);
+                }
+            } else if (winState == 0){
+                alert('DEFEAT');
+                for (i=1; i<=9; i++){
+                    document.getElementById(i).removeEventListener('click', addMarkerO);
+                }
+            } else if (winState == 2){
+                alert('DRAW');
+            }
+        }
+
+        function reset(){
+            for (i=1; i<=9; i++){
+                document.getElementById(i).addEventListener('click', addMarkerO);
+                document.getElementById(i).innerHTML = "";
+                currentO = [];
+                currentX = [];
+                winState = -1;
+
+            }
+        }
+    </script>
+</body>
