@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hangman!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/hangman.css">
+</head>
+
+<body>
+    <h1> This is Hangman! You know the rules.</h1>
+    
+
+    <div class="guessField">
+        <h1 id='wordToGuess'></h2>
+    </div>
+
+    <div id='letterContainer' class="flex-container"> </div>
+
+    <div id='livesRemaining'>Lives: </div>
+    <script>
+        var wordList = ['banana', 'california', 'computer', 'bottle', 'whiteboard', 'chair', 'laptop', 'hairwax', 'supercalifragilisticexpialidocious', 'eraser', 'hail hydra', 'dread it run from it destiny still arrives or should i say i have'];
+        const generatedWord = wordList[Math.floor(Math.random() * wordList.length)];
+        const alphabets = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        var word = generateArray(generatedWord);
+        var lettersGuessed = [];
+        printWord(word);
+        console.log(generatedWord);
+        var tries = 6;
+        showLives();
+
+        //create the alphabet elements on the page
+        for (let i=0; i<alphabets.length; i++){
+            let alphabetBox = document.createElement("div");
+            alphabetBox.id = alphabets[i];
+            alphabetBox.innerHTML = alphabets[i];
+            letterContainer.appendChild(alphabetBox);
+            alphabetBox.className='unguessed';
+            // console.log(alphabetBox.className);
+            document.getElementById(alphabets[i]).addEventListener("click", guessLetter);
+        }
+
+        //what happens to the elements when clicked
+        function guessLetter(){
+            let counter = 0;
+            // let c = 0;
+            if (word.indexOf('_') > -1 && tries > 0){
+                lettersGuessed.push(event.target.id); //letter gets placed into lettersGuessed array
+                event.target.className = 'guessed'; //this class name makes the button grey
+                event.target.removeEventListener("click", guessLetter); //makes it unclickable
+
+                for (let i=0; i<generatedWord.length; i++){
+                    if (generatedWord.charAt(i).toUpperCase() == event.target.id){
+                        word[i]=event.target.id;
+                    } else {
+                        counter++;
+                        if (counter == generatedWord.length) { //ok this is weird but bear with me
+                            tries--; //if the counter is as long as the word length, that means the answer is wrong, so take one life
+                        }
+                    }
+                }
+                printWord(word);
+            } else{
+                //guess isnt allowed when all letters are guessed
+            }
+            showLives();
+        }
+
+        //lives remaining display
+        function showLives(){
+            document.getElementById('livesRemaining').innerHTML = 'Lives: ' + tries;
+            if (tries==0){
+                document.getElementById('livesRemaining').innerHTML = 'Lives: ' + tries + '<br><img src="https://media1.tenor.com/images/9c468fb323378f07bcd4c6962f525556/tenor.gif?itemid=13617414">';
+            }
+        }
+
+        function generateArray(string){
+            let wordArray = [];
+            for (i=0; i<string.length;i++){
+                if (string[i] == ' '){
+                    wordArray.push('&nbsp;&nbsp;');
+                } else{
+                    wordArray.push('_');
+                }
+            }
+            return wordArray;
+        }
+
+        function printWord(array){
+            let displayWord = "";
+            for (i=0; i<array.length; i++){
+                displayWord += array[i] + ' ';
+            }
+            document.querySelector('#wordToGuess').innerHTML = displayWord;
+        }
+
+        // function guessLetter() {
+        //     let guessList = [];
+        //     let guess = prompt('Enter a letter!', 'Try a vowel, it usually works');
+
+        //     if (guess.length > 1) {
+        //         alert('Your guess is to long! Please use a letter')
+        //     } else if (isNaN(guess) == false) { //if it's a number
+        //         alert('Your guess is a number! Please use a letter')
+        //     } else if (guessList.findIndex(guess) != -1) { //if the guess list already has the guess
+        //         alert('You already guessed this letter, try another one.')
+        //     } else {
+        //         guessList.push(guess);
+        //         //TODO: insert code for what to do when the player makes a guess
+        //     }
+
+        // }
+
+        //TODO: figure out tries--
+    </script>
+</body>
