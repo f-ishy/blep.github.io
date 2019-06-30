@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>image clicky</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <img src="./receipt6.jpg" id="pic">
+
+        <form name="clickedCoord" action="">
+            <input type="hidden" value="" name="xCoordinate">
+            <input type="hidden" value="" name="yCoordinate">
+        </form>
+        
+        <script async defer>
+            pic = document.getElementById('pic')
+            pic.addEventListener('click', clickity)
+            const boxItems = {((27, 43), (565, 1092)): 'imagebox', ((93, 56), (186, 76)): 'Isetan', ((199, 53), (213, 74)): '1', ((227, 52), (321, 71)): 'Utama', ((335, 48), (496, 66)): 'Chateraise', ((142, 94), (184, 113)): '2nd', ((196, 91), (277, 113)): 'Floor,', ((289, 91), (326, 108)): 'eat', ((337, 86), (448, 112)): 'paradise', ((88, 131), (160, 149)): 'Isetan', ((171, 128), (260, 147)): 'Bandar', ((270, 125), (348, 143)): 'Utama', ((359, 122), (408, 147)): 'City', ((416, 120), (502, 139)): 'Centre', ((90, 168), (169, 186)): 'Sweet', ((181, 165), (258, 184)): 'Bakes', ((268, 162), (382, 185)): 'Boutique', ((392, 158), (442, 178)): 'Sdn', ((454, 156), (501, 176)): 'Bhd', ((134, 202), (193, 226)): '10-B,', ((205, 202), (269, 220)): 'Jalan', ((280, 198), (409, 222)): 'Teknologi', ((421, 195), (458, 215)): '3/5', ((85, 240), (153, 259)): 'Pusat', ((163, 238), (291, 262)): 'Teknologi', ((302, 235), (412, 252)): 'Sunsuria', ((423, 231), (473, 250)): 'PJU', ((484, 229), (508, 249)): '/5', ((189, 275), (243, 294)): 'Kota', ((256, 273), (395, 292)): 'Damansara', ((211, 309), (369, 328)): '03-77323137', ((167, 365), (180, 380)): '*', ((194, 365), (252, 389)): 'TAX', ((262, 362), (393, 388)): 'INVOICE', ((312, 416), (438, 433)): '27/06/2019', ((464, 413), (512, 431)): '8:42', ((522, 412), (560, 430)): 'PM', ((176, 419), (278, 438)): '1000076', ((31, 420), (97, 439)): 'Order', ((109, 420), (147, 439)): 'No.', ((31, 458), (114, 478)): 'Receipt', ((125, 457), (160, 474)): 'No.', ((176, 463), (178, 475)): ':', ((194, 456), (340, 472)): '001-1228435', ((177, 496), (178, 508)): ':', ((195, 489), (231, 507)): 'Mai', ((31, 492), (116, 509)): 'Cashier', ((406, 536), (504, 554)): 'Amount', ((515, 534), (562, 554)): 'Tax', ((287, 536), (373, 555)): 'U.Price', ((205, 538), (246, 562)): 'Qty', ((30, 539), (88, 559)): 'Item', ((455, 591), (503, 610)): '5.40', ((325, 592), (373, 610)): '5.40', ((236, 593), (243, 611)): '1', ((30, 595), (88, 613)): 'CO42', ((30, 625), (106, 646)): 'Double', ((119, 627), (206, 649)): 'Fantagy', ((313, 657), (373, 675)): '15.85', ((444, 657), (504, 675)): '15.85', ((236, 658), (243, 676)): '1', ((29, 659), (87, 678)): 'C033', ((28, 694), (146, 714)): 'Legendary', ((156, 692), (217, 710)): 'Fresh', ((228, 692), (300, 709)): 'Cream', ((313, 691), (368, 709)): 'Cake', ((28, 754), (119, 773)): 'Subtotal', ((499, 755), (563, 773)): '21.25', ((27, 800), (80, 819)): 'Total', ((500, 800), (563, 818)): '21.25', ((176, 858), (287, 888)): ':MYR', ((27, 859), (95, 889)): 'TOT', ((447, 859), (561, 889)): '21.25', ((30, 912), (136, 936)): 'Payment', ((147, 913), (230, 933)): 'Details', ((29, 944), (77, 964)): 'Cash', ((29, 973), (77, 996)): 'Cash', ((90, 974), (170, 1002)): 'Change', ((503, 946), (565, 965)): '21.25', ((516, 978), (563, 997)): '0.00', ((233, 1043), (302, 1066)): 'Thank', ((312, 1048), (349, 1070)): 'you', ((186, 1077), (260, 1092)): 'Please', ((272, 1082), (330, 1092)): 'come', ((342, 1078), (401, 1092)): 'agan'}
+
+            function clickity(e){
+                var xCoordinate = e.offsetX;
+                var yCoordinate = e.offsetY;
+                // var pic = document.getElementById('pic').value;
+                // document.getElementById('pic').value = xCoordinate + ',' + yCoordinate;
+                clickedCoord.xCoordinate.value = xCoordinate
+                clickedCoord.yCoordinate.value = yCoordinate
+                alert(xCoordinate +", " + yCoordinate)
+            }
+            
+
+        </script>
+    </body>
+</html>
